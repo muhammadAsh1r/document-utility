@@ -1,0 +1,15 @@
+Django>=5.0,<6.0
+djangorestframework>=3.14
+
+# File processing
+PyPDF2>=3.0.0
+python-docx>=1.1.0
+
+# CORS (needed for Vercel frontend)
+django-cors-headers>=4.3.1
+
+# Production server (Render)
+gunicorn>=21.2.0
+
+# Optional but recommended
+python-dotenv>=1.0.1
