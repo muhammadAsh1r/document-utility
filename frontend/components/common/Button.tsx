@@ -1,38 +1,23 @@
-import React from 'react'
+import React from "react";
 
-type ButtonProps = {
-  children: React.ReactNode
-  onClick?: () => void
-  disabled?: boolean
-  variant?: 'primary' | 'secondary' | 'outline'
-  className?: string
-}
+export type ButtonProps =
+  React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-export const Button = ({
-  children,
-  onClick,
-  disabled = false,
-  variant = 'primary',
-  className = '',
-}: ButtonProps) => {
-  const baseStyles =
-    'px-4 py-2 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed'
-
-  const variants = {
-    primary: 'bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800',
-    secondary: 'bg-slate-200 text-slate-700 hover:bg-slate-300 active:bg-slate-400',
-    outline:
-      'border-2 border-slate-300 text-slate-700 hover:border-slate-400 hover:bg-slate-50',
-  }
-
+export const Button = React.forwardRef<
+  HTMLButtonElement,
+  ButtonProps
+>(({ className = "", ...props }, ref) => {
   return (
     <button
-      type="button"
-      onClick={onClick}
-      disabled={disabled}
-      className={`${baseStyles} ${variants[variant]} ${className}`}
-    >
-      {children}
-    </button>
-  )
-}
+      ref={ref}
+      {...props}
+      className={`inline-flex items-center justify-center rounded-lg
+      bg-blue-600 px-4 py-2 text-white font-medium
+      hover:bg-blue-700 transition
+      disabled:opacity-50 disabled:cursor-not-allowed
+      ${className}`}
+    />
+  );
+});
+
+Button.displayName = "Button";
