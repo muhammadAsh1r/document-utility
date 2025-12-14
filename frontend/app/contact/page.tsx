@@ -1,39 +1,40 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import Link from 'next/link'
-import { FileText, Mail, MessageSquare, Send, CheckCircle } from 'lucide-react'
-import { Card } from '@/components/common/Card'
-import { Button } from '@/components/common/Button'
-import { Input } from '@/components/common/Input'
+import { useState } from "react";
+import Link from "next/link";
+import { FileText, Mail, MessageSquare, Send, CheckCircle } from "lucide-react";
+import { Card } from "@/components/common/Card";
+import { Button } from "@/components/common/Button";
+import { Input } from "@/components/common/Input";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  })
-  const [submitted, setSubmitted] = useState(false)
-  const [loading, setLoading] = useState(false)
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setLoading(true)
-    
-    // Simulate API call
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
     setTimeout(() => {
-      setSubmitted(true)
-      setLoading(false)
-    }, 1000)
-  }
+      setSubmitted(true);
+      setLoading(false);
+    }, 1000);
+  };
 
-  const handleChange = (e) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -43,7 +44,9 @@ export default function ContactPage() {
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center space-x-2">
               <FileText className="w-8 h-8 text-blue-600" />
-              <span className="text-2xl font-bold text-slate-900">DocUtility</span>
+              <span className="text-2xl font-bold text-slate-900">
+                DocUtility
+              </span>
             </Link>
             <Link href="/dashboard/metadata">
               <Button>Try Free</Button>
@@ -69,7 +72,10 @@ export default function ContactPage() {
             {!submitted ? (
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-2">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-slate-700 mb-2"
+                  >
                     Name *
                   </label>
                   <Input
@@ -83,7 +89,10 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-slate-700 mb-2"
+                  >
                     Email *
                   </label>
                   <Input
@@ -98,7 +107,10 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-slate-700 mb-2">
+                  <label
+                    htmlFor="subject"
+                    className="block text-sm font-medium text-slate-700 mb-2"
+                  >
                     Subject *
                   </label>
                   <Input
@@ -112,7 +124,10 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-slate-700 mb-2">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-slate-700 mb-2"
+                  >
                     Message *
                   </label>
                   <textarea
@@ -129,7 +144,7 @@ export default function ContactPage() {
 
                 <Button type="submit" disabled={loading} className="w-full">
                   {loading ? (
-                    'Sending...'
+                    "Sending..."
                   ) : (
                     <>
                       Send Message
@@ -145,7 +160,8 @@ export default function ContactPage() {
                   Message Sent!
                 </h3>
                 <p className="text-slate-600 mb-6">
-                  Thanks for reaching out. We'll get back to you within 24 hours.
+                  Thanks for reaching out. We'll get back to you within 24
+                  hours.
                 </p>
                 <Button onClick={() => setSubmitted(false)} variant="outline">
                   Send Another Message
@@ -168,7 +184,10 @@ export default function ContactPage() {
                   <p className="text-slate-600 mb-2">
                     Our team is here to help.
                   </p>
-                  <a href="mailto:support@docutility.com" className="text-blue-600 hover:text-blue-700 font-medium">
+                  <a
+                    href="mailto:support@docutility.com"
+                    className="text-blue-600 hover:text-blue-700 font-medium"
+                  >
                     support@docutility.com
                   </a>
                 </div>
@@ -199,9 +218,15 @@ export default function ContactPage() {
                 Response Time
               </h3>
               <ul className="space-y-2 text-sm text-slate-700">
-                <li>• <strong>Free plan:</strong> Within 48 hours</li>
-                <li>• <strong>Paid plans:</strong> Within 24 hours</li>
-                <li>• <strong>Enterprise:</strong> Priority support</li>
+                <li>
+                  • <strong>Free plan:</strong> Within 48 hours
+                </li>
+                <li>
+                  • <strong>Paid plans:</strong> Within 24 hours
+                </li>
+                <li>
+                  • <strong>Enterprise:</strong> Priority support
+                </li>
               </ul>
             </Card>
 
@@ -211,17 +236,26 @@ export default function ContactPage() {
               </h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/docs" className="text-blue-600 hover:text-blue-700">
+                  <Link
+                    href="/docs"
+                    className="text-blue-600 hover:text-blue-700"
+                  >
                     → API Documentation
                   </Link>
                 </li>
                 <li>
-                  <Link href="/pricing" className="text-blue-600 hover:text-blue-700">
+                  <Link
+                    href="/pricing"
+                    className="text-blue-600 hover:text-blue-700"
+                  >
                     → Pricing & Plans
                   </Link>
                 </li>
                 <li>
-                  <Link href="/dashboard/metadata" className="text-blue-600 hover:text-blue-700">
+                  <Link
+                    href="/dashboard/metadata"
+                    className="text-blue-600 hover:text-blue-700"
+                  >
                     → Try API Now
                   </Link>
                 </li>
@@ -231,5 +265,5 @@ export default function ContactPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
