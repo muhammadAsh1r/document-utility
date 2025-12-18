@@ -1,23 +1,31 @@
 import React from "react";
 
-export type ButtonProps =
-  React.ButtonHTMLAttributes<HTMLButtonElement>;
+type ButtonVariant = "primary" | "secondary" | "outline";
 
-export const Button = React.forwardRef<
-  HTMLButtonElement,
-  ButtonProps
->(({ className = "", ...props }, ref) => {
-  return (
-    <button
-      ref={ref}
-      {...props}
-      className={`inline-flex items-center justify-center rounded-lg
-      bg-blue-600 px-4 py-2 text-white font-medium
-      hover:bg-blue-700 transition
-      disabled:opacity-50 disabled:cursor-not-allowed
-      ${className}`}
-    />
-  );
-});
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: ButtonVariant;
+}
+
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className = "", variant = "primary", ...props }, ref) => {
+    const base =
+      "inline-flex items-center justify-center rounded-lg font-medium transition disabled:opacity-50 disabled:cursor-not-allowed";
+
+    const variants: Record<ButtonVariant, string> = {
+      primary: "bg-blue-600 text-white hover:bg-blue-700",
+      secondary: "bg-white text-blue-600 hover:bg-blue-50",
+      outline: "border border-slate-300 text-slate-700 hover:bg-slate-100",
+    };
+
+    return (
+      <button
+        ref={ref}
+        {...props}
+        className={`${base} ${variants[variant]} ${className}`}
+      />
+    );
+  }
+);
 
 Button.displayName = "Button";
